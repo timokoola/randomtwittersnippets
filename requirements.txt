@@ -1,5 +1,7 @@
 Pillow==2.4.0
 distribute==0.6.49
+gnureadline==6.3.3
+images2gif==1.0.1
 ipython==2.0.0
 stevedore==0.10
 virtualenv==1.9.1
