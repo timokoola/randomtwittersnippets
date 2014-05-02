@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<title>Ulysses</title>
+	<link rel="stylesheet" type="text/css" media="screen" href="ulysses.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<link href="http://fonts.googleapis.com/css?family=Cardo" rel="stylesheet" type="text/css">
+
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div><p></p></div>
+
+
+
+	<script>
+		$(document).ready(function() {
+			var text_all = {};
+			text_line = JSON.parse(localStorage.getItem("line"));
+
+			$.get('pg4300.json', function(data ) {
+				text_all = data;
+			});
+
+			var get_line = function get_line(line) {
+				return text_all[line];
+			}
+
+			var move = function move(many) {
+				$('p').fadeOut("slow", function() {
+				text_line = text_line + many;
+				localStorage.setItem("line", JSON.stringify(text_line));
+				
+				var text = get_line(text_line);
+				var elem = $('p');
+				elem.html(text.text);
+
+				if(text.align == "center") {
+					elem.addClass("center");
+				} else {
+					elem.removeClass("center")
+				}
+				
+				elem.fadeIn("slow");
+			});
+			}
+
+			$("body").keydown(function(event) {
+				console.log(event.which);
+				if(event.which == 37 || event.which ==  38) {
+					move(-1);
+				} else {
+					move(1);
+				}
+
+				
+
+			});
+			move(0);
+		});
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<title>Ulysses</title>
+	<link rel="stylesheet" type="text/css" media="screen" href="ulysses.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<link href="http://fonts.googleapis.com/css?family=Cardo" rel="stylesheet" type="text/css">
+
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<canvas id="textCanvas" width="500px" height="500px"></canvas>
+
+
+
+	<script>
+		$(document).ready(function() {
+			var text_all = {};
+			text_line = JSON.parse(localStorage.getItem("line"));
+
+			$.get('pg4300.json', function(data ) {
+				text_all = data;
+			});
+
+			var get_line = function get_line(line) {
+				return text_all[line];
+			}
+
+			var move = function move(many) {
+				$('canvas').fadeOut("slow", function() {
+				text_line = text_line + many;
+				localStorage.setItem("line", JSON.stringify(text_line));
+				
+				var text = get_line(text_line);
+				var elem = $('canvas');
+
+				var c = document.getElementById("textCanvas");
+				var ctx = c.getContext("2d");
+				ctx.clearRect(0,0,500,500);
+				ctx.font = "2em Cardo";
+				ctx.fillText(text.text, 0, 100);
+
+
+				
+				elem.fadeIn("slow");
+			});
+			}
+
+			$("body").keydown(function(event) {
+				console.log(event.which);
+				if(event.which == 37 || event.which ==  38) {
+					move(-1);
+				} else {
+					move(1);
+				}
+
+				
+
+			});
+			move(0);
+		});
+
+
+	</script>
+</body>
+</html>

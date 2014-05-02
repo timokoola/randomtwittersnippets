@@ -1,0 +1,45 @@
+
+
+
+
+body {
+	 background-color: #bfb6aa;
+}
+
+div {
+	font-family: Cardo, serif;
+	display: table;
+ font-size: 2em;
+ width:500px;
+ height:500px;
+ margin:0 auto;
+ position:absolute;
+ left:50%;
+ top:50%;
+ margin-left:-250px;
+ margin-top:-250px;
+
+}
+
+canvas {
+ position:absolute;
+ left:50%;
+ top:50%;
+  margin-left:-250px;
+ margin-top:-250px;
+}
+
+@font-face {
+    font-family: 'Lekton';
+    src: url('http://fonts.googleapis.com/css?family=Lekton');
+}
+
+p {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: left;
+}
+
+.center {
+	text-align: center;
+}
